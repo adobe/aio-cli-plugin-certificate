@@ -1,0 +1,80 @@
+{
+  "name": "@adobe/aio-cli-plugin-boilerplate",
+  "version": "0.0.0",
+  "dependencies": {
+    "@adobe/aio-cli-config": "^1.0.7",
+    "@adobe/jwt-auth": "^0.1.0",
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/errors": "^1.1.2",
+    "debug": "^4.1.0",
+    "jsonwebtoken": "^8.3.0"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.21.3",
+    "@oclif/plugin-help": "^2.1.4",
+    "@oclif/test": "^1",
+    "acorn": "^6.1.1",
+    "chalk": "^2.4.1",
+    "codecov": "^3.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-oclif": "^3.1.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.13.10",
+    "eslint-plugin-jest": "^22.1.2",
+    "eslint-plugin-node": "^9.0.0",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.1.0",
+    "jest-haste-map": "^24.5.0",
+    "jest-junit": "^6.0.0",
+    "jest-resolve": "^24.5.0",
+    "stdout-stderr": "^0.1.9"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "keywords": [
+    "oclif-plugin",
+    "aio-cli-plugin",
+    "ecosystem:aio-cli-plugin"
+  ],
+  "license": "Apache-2.0",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "./bin/run",
+    "devPlugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "posttest": "eslint src test",
+    "test": "npm run unit-tests",
+    "unit-tests": "jest --ci",
+    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "postpack": "rm -f oclif.manifest.json",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests/fixtures/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/tests/fixtures/"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./test/jest.setup.js"
+    ]
+  }
+}
