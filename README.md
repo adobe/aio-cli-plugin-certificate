@@ -22,5 +22,38 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`./bin/run certificate:generate`](#binrun-certificategenerate)
+* [`./bin/run certificate:validate`](#binrun-certificatevalidate)
 
+## `./bin/run certificate:generate`
+
+Describe the command here
+
+```
+USAGE
+  $ ./bin/run certificate:generate
+
+OPTIONS
+  -n, --name=name  name to print
+
+DESCRIPTION
+  ...
+  Extra documentation goes here
+```
+
+## `./bin/run certificate:validate`
+
+Describe the command here
+
+```
+USAGE
+  $ ./bin/run certificate:validate
+
+OPTIONS
+  -n, --name=name  name to print
+
+DESCRIPTION
+  ...
+  Extra documentation goes here
+```
 <!-- commandsstop -->

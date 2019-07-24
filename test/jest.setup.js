@@ -1,4 +1,3 @@
-
 const { stdout } = require('stdout-stderr')
 
 beforeAll(() => stdout.start())
