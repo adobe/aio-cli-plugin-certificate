@@ -9,11 +9,11 @@ Adobe I/O CLI commands to generate and validate private certs, and public key pa
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g @adobe/aio-cli-plugin-boilerplate
+$ npm install -g @adobe/aio-cli-plugin-certificate
 $ ./bin/run COMMAND
 running command...
 $ ./bin/run (-v|--version|version)
-@adobe/aio-cli-plugin-boilerplate/0.0.0 darwin-x64 node-v10.16.0
+@adobe/aio-cli-plugin-certificate/0.0.0 darwin-x64 node-v10.16.1
 $ ./bin/run --help [COMMAND]
 USAGE
   $ ./bin/run COMMAND
@@ -22,39 +22,43 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`./bin/run certificate`](#binrun-certificate)
 * [`./bin/run certificate:generate`](#binrun-certificategenerate)
 * [`./bin/run certificate:validate`](#binrun-certificatevalidate)
 
+## `./bin/run certificate`
+
+Generate or validate a certificate private/public key pair for use with Adobe I/O Console
+
+```
+USAGE
+  $ ./bin/run certificate
+```
+
 ## `./bin/run certificate:generate`
 
-Describe the command here
+Generate a new private/public key pair
 
 ```
 USAGE
   $ ./bin/run certificate:generate
 
 OPTIONS
-  -n, --name=name  name to print
+  -c, --country=country            Country Name
+  -l, --locality=locality          Locality, or city name
+  -n, --name=name                  Common Name: typically a host domain name, like www.mysite.com
+  -o, --organization=organization  Organization name
+  -s, --state=state                State or Province
+  -u, --unit=unit                  Organizational unit or department
 
 DESCRIPTION
-  ...
-  Extra documentation goes here
 ```
 
 ## `./bin/run certificate:validate`
 
-Describe the command here
-
 ```
 USAGE
   $ ./bin/run certificate:validate
-
-OPTIONS
-  -n, --name=name  name to print
-
-DESCRIPTION
-  ...
-  Extra documentation goes here
 ```
 <!-- commandsstop -->
 

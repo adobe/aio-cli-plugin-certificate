@@ -77,12 +77,36 @@ class GenerateCommand extends Command {
 }
 
 GenerateCommand.description = `Generate a new private/public key pair
-...
-Extra documentation goes here
+
 `
 
 GenerateCommand.flags = {
-  name: flags.string({ char: 'n', description: 'name to print' })
+  name: flags.string({ 
+    char: 'n', 
+    description: 'Common Name: typically a host domain name, like www.mysite.com',
+  }),
+  country: flags.string({
+    char: 'c',
+    description: 'Country Name'
+  }),
+  state: flags.string({
+    char: 's',
+    description: 'State or Province'
+  }),
+  locality: flags.string({
+    char: 'l',
+    description: 'Locality, or city name'
+  }),
+  organization: flags.string({
+    char: 'o',
+    description: 'Organization name'
+  }),
+  unit: flags.string({
+    char: 'u',
+    description: 'Organizational unit or department'
+  })
+
+
 }
 
 module.exports = GenerateCommand
