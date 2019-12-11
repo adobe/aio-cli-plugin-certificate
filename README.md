@@ -1,4 +1,7 @@
 # aio-cli-plugin-certificate
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/adobe/aio-cli-plugin-certificate.svg)](https://greenkeeper.io/)
+
 Adobe I/O CLI commands to generate and validate private certs, and public key pairs for use with Adobe I/O Console
 
 <!-- toc -->
