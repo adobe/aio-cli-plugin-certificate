@@ -50,6 +50,8 @@ OPTIONS
   -o, --organization=organization  Organization name
   -s, --state=state                State or Province
   -u, --unit=unit                  Organizational unit or department
+  --keyout=keyout                  [default: private.key] file to send the key to
+  --out=out                        [default: certificate_pub.crt] output file
 
 DESCRIPTION
 ```
