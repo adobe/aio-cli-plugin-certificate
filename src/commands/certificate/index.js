@@ -20,6 +20,6 @@ class AIOCommand extends Command {
   }
 }
 
-AIOCommand.description = 'Generate or validate a certificate private/public key pair for use with Adobe I/O Console'
+AIOCommand.description = 'Generate or verify a certificate for use with Adobe I/O'
 
 module.exports = AIOCommand

@@ -24,11 +24,11 @@ USAGE
 <!-- commands -->
 * [`./bin/run certificate`](#binrun-certificate)
 * [`./bin/run certificate:generate`](#binrun-certificategenerate)
-* [`./bin/run certificate:validate`](#binrun-certificatevalidate)
+* [`./bin/run certificate:verify FILE`](#binrun-certificateverify-file)
 
 ## `./bin/run certificate`
 
-Generate or validate a certificate private/public key pair for use with Adobe I/O Console
+Generate or verify a certificate for use with Adobe I/O
 
 ```
 USAGE
@@ -50,17 +50,31 @@ OPTIONS
   -o, --organization=organization  Organization name
   -s, --state=state                State or Province
   -u, --unit=unit                  Organizational unit or department
+  --days=days                      [default: 365] Number of days the certificate should be valid for. (Max 365)
   --keyout=keyout                  [default: private.key] file to send the key to
   --out=out                        [default: certificate_pub.crt] output file
 
 DESCRIPTION
+  Generate a self-signed certificate to enable https:// on localhost or signing jwt payloads for interacting with Adobe 
+  services.
 ```
 
-## `./bin/run certificate:validate`
+## `./bin/run certificate:verify FILE`
+
+Verify a certificate for use with Adobe I/O
 
 ```
 USAGE
-  $ ./bin/run certificate:validate
+  $ ./bin/run certificate:verify FILE
+
+ARGUMENTS
+  FILE  file path to certificate to verify
+
+OPTIONS
+  --days=days  +- is certificate valid in --days
+
+DESCRIPTION
+  Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
 <!-- commandsstop -->
 

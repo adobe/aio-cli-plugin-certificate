@@ -27,7 +27,7 @@ const pki = forge.pki
   -out arg       output file
 */
 
-function generateCertificate (commonName, countryName, stateName, cityName, orgName, orgUnit) {
+function generateCertificate (commonName, countryName, stateName, cityName, orgName, orgUnit, days) {
   debug('generating a certificate with ', [commonName, countryName, stateName, cityName, orgName, orgUnit])
   // generate a keypair
 
@@ -40,7 +40,7 @@ function generateCertificate (commonName, countryName, stateName, cityName, orgN
   cert.serialNumber = '01'
   cert.validity.notBefore = new Date()
   cert.validity.notAfter = new Date()
-  cert.validity.notAfter.setFullYear(cert.validity.notBefore.getFullYear() + 1)
+  cert.validity.notAfter.setDate(cert.validity.notAfter.getDate() + days)
 
   const attrs = []
 
@@ -86,8 +86,8 @@ function generateCertificate (commonName, countryName, stateName, cityName, orgN
     delimiter: ':'
   })
   debug('generated public cert in PEM format : ', fingerprint)
-
   return {
+    fingerprint: fingerprint,
     privateKey: pk,
     cert: pemCert
   }
@@ -103,17 +103,17 @@ class GenerateCommand extends Command {
       this.error('--out file exists: ' + flags.out)
     }
 
-    const keyPair = generateCertificate(flags.name, flags.country, flags.state, flags.locality, flags.organization, flags.unit)
-
+    const keyPair = generateCertificate(flags.name, flags.country, flags.state, flags.locality, flags.organization, flags.unit, flags.days)
     fs.writeFileSync(flags.keyout, keyPair.privateKey)
     fs.writeFileSync(flags.out, keyPair.cert)
+    this.log('success: generated certificate')
   }
 }
 
 GenerateCommand.description = `Generate a new private/public key pair
-
+Generate a self-signed certificate to enable https:// on localhost or signing jwt payloads for interacting with Adobe services.
 `
-// -keyout private.key -out certificate_pub.crt
+
 GenerateCommand.flags = {
   keyout: flags.string({
     description: 'file to send the key to',
@@ -146,6 +146,10 @@ GenerateCommand.flags = {
   unit: flags.string({
     char: 'u',
     description: 'Organizational unit or department'
+  }),
+  days: flags.integer({
+    description: 'Number of days the certificate should be valid for. (Max 365)',
+    default: 365
   })
 }
 
