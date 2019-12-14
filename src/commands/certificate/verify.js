@@ -19,29 +19,33 @@ const pki = forge.pki
 class VerifyCommand extends Command {
   async run () {
     const { flags, args } = this.parse(VerifyCommand)
+
     if (!fs.existsSync(args.file)) {
       this.error('input file does not exist: ' + flags.file)
     }
 
     try {
+      // this will throw if file is not a valid pem
       const cert = pki.certificateFromPem(fs.readFileSync(args.file))
       // this following check does not seem to catch expired certificates
-      const isVerified = cert.verify(cert)
-
+      /* const isVerified = */
+      cert.verify(cert)
       if (flags.days) {
         const dateToCheck = new Date()
         dateToCheck.setDate(dateToCheck.getDate() + flags.days)
         if (cert.validity.notAfter > dateToCheck && cert.validity.notBefore < dateToCheck) {
           this.log(`certificate ${flags.days >= 0 ? 'will still be' : 'was'} valid in ${flags.days} days`)
+          return true
         } else {
           this.log(`certificate ${flags.days >= 0 ? 'will NOT be' : 'was NOT'} valid in ${flags.days} days`)
+          return false
         }
       } else {
         const caStore = pki.createCaStore([ cert ])
         const isPkiVerified = pki.verifyCertificateChain(caStore, [ cert ])
         debug('verifying certFromPem: ', cert)
-        this.log((isVerified && isPkiVerified) ? 'Verified' : 'Not Verified')
-        return isVerified && isPkiVerified
+        this.log((isPkiVerified) ? 'Verified' : 'Not Verified')
+        return isPkiVerified
       }
     } catch (err) {
       debug('error verifying certificate: ', err)
