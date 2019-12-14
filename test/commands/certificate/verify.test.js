@@ -14,6 +14,7 @@ const TheCommand = require('../../../src/commands/certificate/verify')
 
 const mockFS = require('fs-extra')
 const mockForge = require('node-forge')
+jest.mock('node-forge')
 
 const distantFuture = new Date()
 distantFuture.setFullYear(distantFuture.getFullYear() + 1)
@@ -140,5 +141,4 @@ describe('instance methods', () => {
     await expect(command.run()).resolves.toBe(true)
     expect(handleError).not.toHaveBeenCalled()
   })
-
 })
