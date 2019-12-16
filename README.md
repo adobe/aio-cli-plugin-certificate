@@ -13,7 +13,7 @@ $ npm install -g @adobe/aio-cli-plugin-certificate
 $ ./bin/run COMMAND
 running command...
 $ ./bin/run (-v|--version|version)
-@adobe/aio-cli-plugin-certificate/0.0.0 darwin-x64 node-v10.16.1
+@adobe/aio-cli-plugin-certificate/0.1.0 darwin-x64 node-v10.16.1
 $ ./bin/run --help [COMMAND]
 USAGE
   $ ./bin/run COMMAND
@@ -34,6 +34,8 @@ Generate or verify a certificate for use with Adobe I/O
 USAGE
   $ ./bin/run certificate
 ```
+
+_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.0/src/commands/certificate/index.js)_
 
 ## `./bin/run certificate:generate`
 
@@ -59,6 +61,8 @@ DESCRIPTION
   services.
 ```
 
+_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.0/src/commands/certificate/generate.js)_
+
 ## `./bin/run certificate:verify FILE`
 
 Verify a certificate for use with Adobe I/O
@@ -76,6 +80,8 @@ OPTIONS
 DESCRIPTION
   Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
+
+_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.0/src/commands/certificate/verify.js)_
 <!-- commandsstop -->
 
 ## Contributing
