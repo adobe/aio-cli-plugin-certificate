@@ -32,12 +32,21 @@ class VerifyCommand extends Command {
       cert.verify(cert)
       if (flags.days) {
         const dateToCheck = new Date()
+        const dayString = (Math.abs(flags.days) === 1) ? 'day' : 'days'
         dateToCheck.setDate(dateToCheck.getDate() + flags.days)
         if (cert.validity.notAfter > dateToCheck && cert.validity.notBefore < dateToCheck) {
-          this.log(`certificate ${flags.days >= 0 ? 'will still be' : 'was'} valid in ${flags.days} days`)
+          if (flags.days >= 0) {
+            this.log(`certificate will be valid in ${flags.days} ${dayString}`)
+          } else {
+            this.log(`certificate was valid ${-flags.days} ${dayString} ago`)
+          }
           return true
         } else {
-          this.log(`certificate ${flags.days >= 0 ? 'will NOT be' : 'was NOT'} valid in ${flags.days} days`)
+          if (flags.days >= 0) {
+            this.log(`certificate will NOT be valid in ${flags.days} ${dayString}`)
+          } else {
+            this.log(`certificate was NOT valid ${-flags.days} ${dayString} ago`)
+          }
           return false
         }
       } else {
