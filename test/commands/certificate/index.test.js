@@ -31,7 +31,7 @@ describe('instance methods', () => {
     expect(TheCommand.run).toBeDefined()
     expect(command.run).toBeDefined()
     command.argv = []
-    let result = command.run()
+    const result = command.run()
     // todo: fix this test, it actually should NOT throw, and simply output some help text
     await expect(result).rejects.toThrow()
   })

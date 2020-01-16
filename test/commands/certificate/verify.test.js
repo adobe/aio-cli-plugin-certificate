@@ -93,11 +93,13 @@ describe('instance methods', () => {
   test('run with valid file (date too late)', async () => {
     mockFS.existsSync.mockReturnValue(true)
 
-    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true),
+    mockForge.pki.certificateFromPem.mockReturnValue({
+      verify: jest.fn(() => true),
       validity: {
         notAfter: now,
         notBefore: distantPast
-      } })
+      }
+    })
     command.argv = ['file', '--days=12']
     await expect(command.run()).resolves.toBe(false)
     expect(handleError).not.toHaveBeenCalled()
@@ -106,11 +108,13 @@ describe('instance methods', () => {
   test('run with valid file (date too early)', async () => {
     mockFS.existsSync.mockReturnValue(true)
 
-    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true),
+    mockForge.pki.certificateFromPem.mockReturnValue({
+      verify: jest.fn(() => true),
       validity: {
         notAfter: distantFuture,
         notBefore: now
-      } })
+      }
+    })
     command.argv = ['file', '--days=-12']
     await expect(command.run()).resolves.toBe(false)
     expect(handleError).not.toHaveBeenCalled()
@@ -119,11 +123,13 @@ describe('instance methods', () => {
   test('run with valid file (date is good and in the future)', async () => {
     mockFS.existsSync.mockReturnValue(true)
 
-    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true),
+    mockForge.pki.certificateFromPem.mockReturnValue({
+      verify: jest.fn(() => true),
       validity: {
         notAfter: distantFuture,
         notBefore: now
-      } })
+      }
+    })
     command.argv = ['file', '--days=1']
     await expect(command.run()).resolves.toBe(true)
     expect(handleError).not.toHaveBeenCalled()
@@ -132,11 +138,13 @@ describe('instance methods', () => {
   test('run with valid file (date is good and in the past)', async () => {
     mockFS.existsSync.mockReturnValue(true)
 
-    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true),
+    mockForge.pki.certificateFromPem.mockReturnValue({
+      verify: jest.fn(() => true),
       validity: {
         notAfter: now,
         notBefore: distantPast
-      } })
+      }
+    })
     command.argv = ['file', '--days=-1']
     await expect(command.run()).resolves.toBe(true)
     expect(handleError).not.toHaveBeenCalled()

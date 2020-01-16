@@ -50,8 +50,8 @@ class VerifyCommand extends Command {
           return false
         }
       } else {
-        const caStore = pki.createCaStore([ cert ])
-        const isPkiVerified = pki.verifyCertificateChain(caStore, [ cert ])
+        const caStore = pki.createCaStore([cert])
+        const isPkiVerified = pki.verifyCertificateChain(caStore, [cert])
         debug('verifying certFromPem: ', cert)
         this.log((isPkiVerified) ? 'Verified' : 'Not Verified')
         return isPkiVerified
