@@ -1,3 +1,11 @@
+[![Version](https://img.shields.io/npm/v/@adobe/aio-cli-plugin-certificate.svg)](https://npmjs.org/package/@adobe/aio-cli-plugin-certificate)
+[![Downloads/week](https://img.shields.io/npm/dw/@adobe/aio-cli-plugin-certificate.svg)](https://npmjs.org/package/@adobe/aio-cli-plugin-certificate)
+[![Build Status](https://travis-ci.com/adobe/aio-cli-plugin-certificate.svg?branch=master)](https://travis-ci.com/adobe/aio-cli-plugin-certificate)
+[![Codecov Coverage](https://img.shields.io/codecov/c/github/adobe/aio-cli-plugin-certificate/master.svg?style=flat-square)](https://codecov.io/gh/adobe/aio-cli-plugin-certificate/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/adobe/aio-cli-plugin-certificate.svg)](https://greenkeeper.io/)
+
+## Usage
+
 # aio-cli-plugin-certificate
 Adobe I/O CLI commands to generate and validate private certs, and public key pairs for use with Adobe I/O Console
 
