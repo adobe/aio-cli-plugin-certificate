@@ -37,16 +37,14 @@ function generateCertificate (commonName, countryName, stateName, cityName, orgN
 
   // fill the required fields
   cert.publicKey = keys.publicKey
-  cert.serialNumber = '01'
+  cert.serialNumber = Date.now().toString()
   cert.validity.notBefore = new Date()
   cert.validity.notAfter = new Date()
   cert.validity.notAfter.setDate(cert.validity.notAfter.getDate() + days)
 
   const attrs = []
 
-  if (commonName) {
-    attrs.push({ name: 'commonName', value: commonName })
-  }
+  attrs.push({ name: 'commonName', value: commonName })
 
   if (countryName) {
     attrs.push({ name: 'countryName', value: countryName })
@@ -72,22 +70,36 @@ function generateCertificate (commonName, countryName, stateName, cityName, orgN
   cert.setSubject(attrs)
   cert.setIssuer(attrs)
 
-  // sign the cert
-  cert.sign(keys.privateKey)
+  cert.setExtensions([
+    {
+      name: 'basicConstraints',
+      cA: false
+    },
+    {
+      name: 'keyUsage',
+      keyCertSign: true,
+      digitalSignature: true,
+      nonRepudiation: true,
+      keyEncipherment: true,
+      dataEncipherment: true
+    },
+    {
+      name: 'extKeyUsage',
+      serverAuth: true,
+      clientAuth: true,
+      codeSigning: true,
+      emailProtection: true,
+      timeStamping: true
+    }
+  ])
 
+  // sign the cert
+  cert.sign(keys.privateKey, forge.md.sha256.create())
   const pk = pki.privateKeyToPem(keys.privateKey)
   debug('generated private key')
   // convert cert to PEM format
   const pemCert = pki.certificateToPem(cert)
-
-  const fingerprint = pki.getPublicKeyFingerprint(cert.publicKey, {
-    md: forge.md.sha256.create(),
-    encoding: 'hex',
-    delimiter: ':'
-  })
-  debug('generated public cert in PEM format : ', fingerprint)
   return {
-    fingerprint: fingerprint,
     privateKey: pk,
     cert: pemCert
   }
@@ -125,7 +137,8 @@ GenerateCommand.flags = {
   }),
   name: flags.string({
     char: 'n',
-    description: 'Common Name: typically a host domain name, like www.mysite.com'
+    description: 'Common Name: typically a host domain name, like www.mysite.com',
+    default: 'selfsign.localhost'
   }),
   country: flags.string({
     char: 'c',
