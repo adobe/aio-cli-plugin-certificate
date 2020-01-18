@@ -21,7 +21,7 @@ $ npm install -g @adobe/aio-cli-plugin-certificate
 $ ./bin/run COMMAND
 running command...
 $ ./bin/run (-v|--version|version)
-@adobe/aio-cli-plugin-certificate/0.1.0 darwin-x64 node-v10.16.1
+@adobe/aio-cli-plugin-certificate/0.1.1 darwin-x64 node-v10.16.1
 $ ./bin/run --help [COMMAND]
 USAGE
   $ ./bin/run COMMAND
@@ -43,7 +43,7 @@ USAGE
   $ ./bin/run certificate
 ```
 
-_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.0/src/commands/certificate/index.js)_
+_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.1/src/commands/certificate/index.js)_
 
 ## `./bin/run certificate:generate`
 
@@ -56,12 +56,20 @@ USAGE
 OPTIONS
   -c, --country=country            Country Name
   -l, --locality=locality          Locality, or city name
-  -n, --name=name                  Common Name: typically a host domain name, like www.mysite.com
+
+  -n, --name=name                  [default: selfsign.localhost] Common Name: typically a host domain name, like
+                                   www.mysite.com
+
   -o, --organization=organization  Organization name
+
   -s, --state=state                State or Province
+
   -u, --unit=unit                  Organizational unit or department
+
   --days=days                      [default: 365] Number of days the certificate should be valid for. (Max 365)
+
   --keyout=keyout                  [default: private.key] file to send the key to
+
   --out=out                        [default: certificate_pub.crt] output file
 
 DESCRIPTION
@@ -69,7 +77,7 @@ DESCRIPTION
   services.
 ```
 
-_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.0/src/commands/certificate/generate.js)_
+_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.1/src/commands/certificate/generate.js)_
 
 ## `./bin/run certificate:verify FILE`
 
@@ -89,7 +97,7 @@ DESCRIPTION
   Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
 
-_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.0/src/commands/certificate/verify.js)_
+_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.1/src/commands/certificate/verify.js)_
 <!-- commandsstop -->
 
 ## Contributing

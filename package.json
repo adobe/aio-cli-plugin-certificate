@@ -1,6 +1,6 @@
 {
   "name": "@adobe/aio-cli-plugin-certificate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "adobe/aio-cli-plugin-certificate",
   "homepage": "https://github.com/adobe/aio-cli-plugin-certificate",
   "dependencies": {
