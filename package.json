@@ -49,7 +49,7 @@
       "@oclif/plugin-help"
     ]
   },
-  "main": "src/index.js",
+  "main": "src/certificate-helpers.js",
   "scripts": {
     "posttest": "eslint src test",
     "test": "npm run unit-tests",
