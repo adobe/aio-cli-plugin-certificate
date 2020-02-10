@@ -27,7 +27,7 @@ const pki = forge.pki
  * @param {string} [attributes.unit]
  * @returns {{privateKey: string, cert: string}} key pair
  */
-function generateCertificate (commonName, days, /* istanbul ignore next */ attributes = {}) {
+function generate (commonName, days, /* istanbul ignore next */ attributes = {}) {
   debug('generating a certificate with ', commonName, attributes)
   // generates a keypair
 
@@ -112,7 +112,7 @@ function generateCertificate (commonName, days, /* istanbul ignore next */ attri
  * @param {string|Buffer} pemCert
  * @returns {{verified: boolean, validUntil: Date, validSince: Date}} key pair
  */
-function verifyCertificate (pemCert) {
+function verify (pemCert) {
   // this will throw if not a valid pem
   const cert = pki.certificateFromPem(pemCert)
 
@@ -128,6 +128,6 @@ function verifyCertificate (pemCert) {
 }
 
 module.exports = {
-  generateCertificate,
-  verifyCertificate
+  generate,
+  verify
 }

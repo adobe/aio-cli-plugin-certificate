@@ -14,7 +14,7 @@ const { Command, flags } = require('@oclif/command')
 const fs = require('fs-extra')
 const debug = require('debug')('aio-cli-plugin-certificate:generate')
 
-const { generateCertificate } = require('../../certificate-helpers')
+const cert = require('../../certificate')
 
 class GenerateCommand extends Command {
   async run () {
@@ -28,7 +28,7 @@ class GenerateCommand extends Command {
 
     debug('generating certificate with flags', flags)
 
-    const keyPair = generateCertificate(flags.name, flags.days, { country: flags.country, state: flags.state, locality: flags.locality, organization: flags.organization, unit: flags.unit })
+    const keyPair = cert.generate(flags.name, flags.days, { country: flags.country, state: flags.state, locality: flags.locality, organization: flags.organization, unit: flags.unit })
     fs.writeFileSync(flags.keyout, keyPair.privateKey)
     fs.writeFileSync(flags.out, keyPair.cert)
     this.log('success: generated certificate')

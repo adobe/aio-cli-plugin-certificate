@@ -14,7 +14,7 @@ const { Command, flags } = require('@oclif/command')
 const fs = require('fs-extra')
 const debug = require('debug')('aio-cli-plugin-certificate:verify')
 
-const { verifyCertificate } = require('../../certificate-helpers')
+const cert = require('../../certificate')
 
 class VerifyCommand extends Command {
   async run () {
@@ -28,7 +28,7 @@ class VerifyCommand extends Command {
       const pemCert = fs.readFileSync(args.file).toString()
       debug('verifying cert from pem: ', pemCert)
       // this will throw if file is not a valid pem content
-      const res = verifyCertificate(pemCert)
+      const res = cert.verify(pemCert)
 
       if (flags.days) {
         const dateToCheck = new Date()
