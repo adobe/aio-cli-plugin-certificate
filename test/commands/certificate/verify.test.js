@@ -74,7 +74,7 @@ describe('instance methods', () => {
 
   test('run with invalid file ( false & true )', async () => {
     mockFS.existsSync.mockReturnValue(true)
-    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true) })
+    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true), validity: {} })
     mockForge.pki.verifyCertificateChain.mockReturnValue(true)
     command.argv = ['file']
     await expect(command.run()).resolves.toBe(true)
@@ -83,7 +83,7 @@ describe('instance methods', () => {
 
   test('run with invalid file ( true & false )', async () => {
     mockFS.existsSync.mockReturnValue(true)
-    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true) })
+    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true), validity: {} })
     mockForge.pki.verifyCertificateChain.mockReturnValue(false)
     command.argv = ['file']
     await expect(command.run()).resolves.toBe(false)
