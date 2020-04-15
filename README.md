@@ -21,7 +21,7 @@ $ npm install -g @adobe/aio-cli-plugin-certificate
 $ ./bin/run COMMAND
 running command...
 $ ./bin/run (-v|--version|version)
-@adobe/aio-cli-plugin-certificate/0.1.1 darwin-x64 node-v10.16.1
+@adobe/aio-cli-plugin-certificate/0.1.1 darwin-x64 node-v10.18.1
 $ ./bin/run --help [COMMAND]
 USAGE
   $ ./bin/run COMMAND
@@ -43,7 +43,7 @@ USAGE
   $ ./bin/run certificate
 ```
 
-_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.1/src/commands/certificate/index.js)_
+_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.1.1/src/commands/certificate/index.js)_
 
 ## `./bin/run certificate:generate`
 
@@ -77,7 +77,7 @@ DESCRIPTION
   services.
 ```
 
-_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.1/src/commands/certificate/generate.js)_
+_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.1.1/src/commands/certificate/generate.js)_
 
 ## `./bin/run certificate:verify FILE`
 
@@ -97,7 +97,7 @@ DESCRIPTION
   Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
 
-_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/v0.1.1/src/commands/certificate/verify.js)_
+_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.1.1/src/commands/certificate/verify.js)_
 <!-- commandsstop -->
 
 ## Contributing

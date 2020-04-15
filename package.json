@@ -48,7 +48,8 @@
     "bin": "./bin/run",
     "devPlugins": [
       "@oclif/plugin-help"
-    ]
+    ],
+    "repositoryPrefix": "<%- repo %>/blob/<%- version %>/<%- commandPath %>"
   },
   "main": "src/certificate-helpers.js",
   "scripts": {
