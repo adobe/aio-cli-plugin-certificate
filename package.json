@@ -51,7 +51,7 @@
     ],
     "repositoryPrefix": "<%- repo %>/blob/<%- version %>/<%- commandPath %>"
   },
-  "main": "src/certificate-helpers.js",
+  "main": "src/certificate.js",
   "scripts": {
     "posttest": "eslint src test",
     "test": "npm run unit-tests",
