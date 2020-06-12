@@ -14,44 +14,39 @@ Adobe I/O CLI commands to generate and validate private certs, and public key pa
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
-<!-- usage -->
 ```sh-session
-$ npm install -g @adobe/aio-cli-plugin-certificate
-$ ./bin/run COMMAND
-running command...
-$ ./bin/run (-v|--version|version)
-@adobe/aio-cli-plugin-certificate/0.2.0 darwin-x64 node-v10.18.1
-$ ./bin/run --help [COMMAND]
-USAGE
-  $ ./bin/run COMMAND
-...
+$ aio plugins:install -g @adobe/aio-cli-plugin-certificate
+$ # OR
+$ aio discover -i
+$ aio certificate --help
 ```
-<!-- usagestop -->
+
 # Commands
 <!-- commands -->
-* [`./bin/run certificate`](#binrun-certificate)
-* [`./bin/run certificate:generate`](#binrun-certificategenerate)
-* [`./bin/run certificate:verify FILE`](#binrun-certificateverify-file)
+* [`aio certificate`](#aio-certificate)
+* [`aio certificate:generate`](#aio-certificategenerate)
+* [`aio certificate:verify FILE`](#aio-certificateverify-file)
 
-## `./bin/run certificate`
+## `aio certificate`
 
 Generate or verify a certificate for use with Adobe I/O
 
 ```
 USAGE
-  $ ./bin/run certificate
+  $ aio certificate
 ```
 
 _See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.2.0/src/commands/certificate/index.js)_
 
-## `./bin/run certificate:generate`
+## `aio certificate:generate`
 
 Generate a new private/public key pair
 
 ```
 USAGE
-  $ ./bin/run certificate:generate
+  $ aio certificate:generate
 
 OPTIONS
   -c, --country=country            Country Name
@@ -79,13 +74,13 @@ DESCRIPTION
 
 _See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.2.0/src/commands/certificate/generate.js)_
 
-## `./bin/run certificate:verify FILE`
+## `aio certificate:verify FILE`
 
 Verify a certificate for use with Adobe I/O
 
 ```
 USAGE
-  $ ./bin/run certificate:verify FILE
+  $ aio certificate:verify FILE
 
 ARGUMENTS
   FILE  file path to certificate to verify
