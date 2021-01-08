@@ -13,49 +13,46 @@ governing permissions and limitations under the License.
 const { Command, flags } = require('@oclif/command')
 const fs = require('fs-extra')
 const debug = require('debug')('aio-cli-plugin-certificate:verify')
-const forge = require('node-forge')
-const pki = forge.pki
+
+const cert = require('../../certificate')
 
 class VerifyCommand extends Command {
   async run () {
     const { flags, args } = this.parse(VerifyCommand)
 
     if (!fs.existsSync(args.file)) {
-      this.error('input file does not exist: ' + flags.file)
+      this.error('input file does not exist: ' + args.file)
     }
 
     try {
-      // this will throw if file is not a valid pem
-      const cert = pki.certificateFromPem(fs.readFileSync(args.file))
-      // this following check does not seem to catch expired certificates
-      /* const isVerified = */
-      cert.verify(cert)
+      const pemCert = fs.readFileSync(args.file).toString()
+      debug('verifying cert from pem: ', pemCert)
+      // this will throw if file is not a valid pem content
+      const res = cert.verify(pemCert)
+
       if (flags.days) {
         const dateToCheck = new Date()
         const dayString = (Math.abs(flags.days) === 1) ? 'day' : 'days'
         dateToCheck.setDate(dateToCheck.getDate() + flags.days)
-        if (cert.validity.notAfter > dateToCheck && cert.validity.notBefore < dateToCheck) {
+
+        if (res.validUntil > dateToCheck && res.validSince < dateToCheck) {
           if (flags.days >= 0) {
             this.log(`certificate will be valid in ${flags.days} ${dayString}`)
           } else {
             this.log(`certificate was valid ${-flags.days} ${dayString} ago`)
           }
           return true
-        } else {
-          if (flags.days >= 0) {
-            this.log(`certificate will NOT be valid in ${flags.days} ${dayString}`)
-          } else {
-            this.log(`certificate was NOT valid ${-flags.days} ${dayString} ago`)
-          }
-          return false
         }
-      } else {
-        const caStore = pki.createCaStore([cert])
-        const isPkiVerified = pki.verifyCertificateChain(caStore, [cert])
-        debug('verifying certFromPem: ', cert)
-        this.log((isPkiVerified) ? 'Verified' : 'Not Verified')
-        return isPkiVerified
+        if (flags.days >= 0) {
+          this.log(`certificate will NOT be valid in ${flags.days} ${dayString}`)
+        } else {
+          this.log(`certificate was NOT valid ${-flags.days} ${dayString} ago`)
+        }
+        return false
       }
+
+      this.log((res.verified) ? 'Verified' : 'Not Verified')
+      return res.verified
     } catch (err) {
       debug('error verifying certificate: ', err)
       this.error(err.message)

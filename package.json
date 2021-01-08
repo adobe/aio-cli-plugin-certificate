@@ -1,6 +1,7 @@
 {
   "name": "@adobe/aio-cli-plugin-certificate",
-  "version": "0.1.1",
+  "version": "0.2.0",
+  "description": "Generate and validate private certs, and public key pairs for use with Adobe IO Console",
   "repository": "adobe/aio-cli-plugin-certificate",
   "homepage": "https://github.com/adobe/aio-cli-plugin-certificate",
   "dependencies": {
@@ -8,7 +9,7 @@
     "@oclif/config": "^1",
     "@oclif/errors": "^1.1.2",
     "debug": "^4.1.0",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "node-forge": "^0.10.0"
   },
   "devDependencies": {
@@ -26,7 +27,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^24.1.0",
     "jest-junit": "^10.0.0",
-    "jest-resolve": "^25.1.0",
+    "jest-resolve": "^26.0.0",
     "stdout-stderr": "^0.1.9"
   },
   "engines": {
@@ -44,12 +45,13 @@
   "license": "Apache-2.0",
   "oclif": {
     "commands": "./src/commands",
-    "bin": "./bin/run",
+    "bin": "aio",
     "devPlugins": [
       "@oclif/plugin-help"
-    ]
+    ],
+    "repositoryPrefix": "<%- repo %>/blob/<%- version %>/<%- commandPath %>"
   },
-  "main": "src/index.js",
+  "main": "src/certificate.js",
   "scripts": {
     "posttest": "eslint src test",
     "test": "npm run unit-tests",
