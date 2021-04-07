@@ -13,6 +13,7 @@ governing permissions and limitations under the License.
 const TheCommand = require('../../../src/commands/certificate/generate')
 
 const mockFS = require('fs-extra')
+const forge = require('node-forge')
 
 test('exports', async () => {
   expect(typeof TheCommand).toEqual('function')
@@ -52,6 +53,22 @@ describe('instance methods', () => {
     await command.run()
     expect(mockFS.existsSync).toHaveBeenCalledTimes(2)
     expect(mockFS.writeFileSync).toHaveBeenCalledTimes(2)
+  })
+
+  test('run: has subject alt names', async () => {
+    mockFS.existsSync.mockReturnValue(false)
+    command.argv = ['-n=localhost', '-o=cert']
+    await command.run()
+    expect(mockFS.writeFileSync).toHaveBeenCalledTimes(2)
+    const certSave = mockFS.writeFileSync.mock.calls.find(theCall => theCall[0] === 'certificate_pub.crt')
+    expect(certSave).toBeTruthy()
+    const pem = certSave[1]
+    const cert = forge.pki.certificateFromPem(pem)
+    const altnames = cert.getExtension('subjectAltName')
+    expect(altnames).toHaveProperty('altNames', expect.arrayContaining([{
+      type: 2, // DNS
+      value: 'localhost'
+    }]))
   })
 
   // throw error '--keyout file exists: ...'

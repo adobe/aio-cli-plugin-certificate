@@ -90,6 +90,13 @@ function generate (commonName, days, /* istanbul ignore next */ attributes = {})
       codeSigning: true,
       emailProtection: true,
       timeStamping: true
+    },
+    {
+      name: 'subjectAltName',
+      altNames: [{
+        type: 2, // DNS
+        value: commonName
+      }]
     }
   ])
 
