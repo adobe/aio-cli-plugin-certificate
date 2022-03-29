@@ -38,7 +38,7 @@ USAGE
   $ aio certificate
 ```
 
-_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.0/src/commands/certificate/index.js)_
+_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/index.js)_
 
 ## `aio certificate:generate`
 
@@ -72,7 +72,7 @@ DESCRIPTION
   services.
 ```
 
-_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.0/src/commands/certificate/generate.js)_
+_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/generate.js)_
 
 ## `aio certificate:verify FILE`
 
@@ -92,7 +92,7 @@ DESCRIPTION
   Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
 
-_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.0/src/commands/certificate/verify.js)_
+_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/verify.js)_
 <!-- commandsstop -->
 
 ## Contributing
