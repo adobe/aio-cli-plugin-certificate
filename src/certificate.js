@@ -1,6 +1,36 @@
+/*
+Copyright 2019 Adobe Inc. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
 const debug = require('debug')('aio-cli-plugin-certificate:helpers')
 const forge = require('node-forge')
 const pki = forge.pki
+const asn1 = forge.asn1
+
+/**
+ * Computes the SHA-1 digest of the entire DER-encoded x.509 certificate
+ * contained in the provided PEM-encoded string, which gives the same result as
+ * using "openssl x509 -fingerprint", except without delimiters and in
+ * all lowercase.
+ *
+ * @param {string|Buffer} pemCert PEM-encoded sting containing x509 certificate
+ * @returns {{certificateFingerprint: string}} x509 fingerprint
+ */
+function fingerprint (pemCert) {
+  const cert = pki.certificateFromPem(pemCert)
+  const bytes = asn1.toDer(pki.certificateToAsn1(cert)).getBytes()
+  const md = forge.md.sha1.create()
+  md.start()
+  md.update(bytes)
+  return { certificateFingerprint: md.digest().toHex() }
+}
 
 /**
   openssl req -x509 -sha256 -nodes -days 365 -subj "/C=US/" -newkey rsa:2048 -keyout private.key -out certificate_pub.crt
@@ -135,6 +165,7 @@ function verify (pemCert) {
 }
 
 module.exports = {
+  fingerprint,
   generate,
   verify
 }
