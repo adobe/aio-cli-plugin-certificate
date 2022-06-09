@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { Command, flags } = require('@oclif/command')
+const { Command, Flags } = require('@oclif/core')
 const fs = require('fs-extra')
 const debug = require('debug')('aio-cli-plugin-certificate:verify')
 
@@ -18,7 +18,7 @@ const cert = require('../../certificate')
 
 class VerifyCommand extends Command {
   async run () {
-    const { flags, args } = this.parse(VerifyCommand)
+    const { flags, args } = await this.parse(VerifyCommand)
 
     if (!fs.existsSync(args.file)) {
       this.error('input file does not exist: ' + args.file)
@@ -65,7 +65,7 @@ Verifies that the certificate is valid, and/or will not expire in [--days] days 
 `
 
 VerifyCommand.flags = {
-  days: flags.integer({
+  days: Flags.integer({
     description: '+- is certificate valid in --days'
   })
 }

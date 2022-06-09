@@ -10,13 +10,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const HHelp = require('@oclif/plugin-help').default
-const { Command } = require('@oclif/command')
+const { Command, Help } = require('@oclif/core')
 
 class AIOCommand extends Command {
   async run () {
-    const help = new HHelp(this.config)
-    help.showHelp(['certificate:generate', '--help'])
+    const help = new Help(this.config)
+    return await help.showHelp(['certificate:generate', '--help'])
   }
 }
 
