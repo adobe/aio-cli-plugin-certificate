@@ -26,6 +26,7 @@ $ aio certificate --help
 # Commands
 <!-- commands -->
 * [`aio certificate`](#aio-certificate)
+* [`aio certificate:fingerprint FILE`](#aio-certificatefingerprint-file)
 * [`aio certificate:generate`](#aio-certificategenerate)
 * [`aio certificate:verify FILE`](#aio-certificateverify-file)
 
@@ -38,7 +39,21 @@ USAGE
   $ aio certificate
 ```
 
-_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/index.js)_
+_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.4.0/src/commands/certificate/index.js)_
+
+## `aio certificate:fingerprint FILE`
+
+Compute the fingerprint of a public key certificate for use with Adobe I/O
+
+```
+USAGE
+  $ aio certificate:fingerprint FILE
+
+ARGUMENTS
+  FILE  file path to certificate to fingerprint
+```
+
+_See code: [src/commands/certificate/fingerprint.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.4.0/src/commands/certificate/fingerprint.js)_
 
 ## `aio certificate:generate`
 
@@ -72,7 +87,7 @@ DESCRIPTION
   services.
 ```
 
-_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/generate.js)_
+_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.4.0/src/commands/certificate/generate.js)_
 
 ## `aio certificate:verify FILE`
 
@@ -92,7 +107,7 @@ DESCRIPTION
   Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
 
-_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/verify.js)_
+_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.4.0/src/commands/certificate/verify.js)_
 <!-- commandsstop -->
 
 ## Contributing
