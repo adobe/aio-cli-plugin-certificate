@@ -49,9 +49,9 @@
     "posttest": "eslint src test",
     "test": "npm run unit-tests",
     "unit-tests": "jest --ci",
-    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "prepack": "oclif manifest && oclif readme",
     "postpack": "rm -f oclif.manifest.json",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "oclif readme && git add README.md"
   },
   "jest": {
     "collectCoverage": true,
