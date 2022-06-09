@@ -1,0 +1,37 @@
+name: publish-branch
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "The branch to publish."
+        required: false
+        default: "master"
+      tag:
+        description: "The tag to publish to."
+        required: false
+        default: "latest"
+jobs:
+  checkout:
+    name: checkout
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ADOBE_BOT_GITHUB_TOKEN }}
+          ref: ${{ github.event.inputs.branch }}
+      - name: Configure CI Git User
+        run: |
+          git config user.name adobe-bot
+          git config user.email grp-opensourceoffice@adobe.com
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: |
+          npm install
+          npm test
+      - name: pub
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
+          tag: ${{ github.event.inputs.tag }}
+          access: "public"
