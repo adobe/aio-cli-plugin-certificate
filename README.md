@@ -26,6 +26,7 @@ $ aio certificate --help
 # Commands
 <!-- commands -->
 * [`aio certificate`](#aio-certificate)
+* [`aio certificate:fingerprint FILE`](#aio-certificatefingerprint-file)
 * [`aio certificate:generate`](#aio-certificategenerate)
 * [`aio certificate:verify FILE`](#aio-certificateverify-file)
 
@@ -39,6 +40,20 @@ USAGE
 ```
 
 _See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/index.js)_
+
+## `aio certificate:fingerprint FILE`
+
+Compute the fingerprint of a public key certificate for use with Adobe I/O
+
+```
+USAGE
+  $ aio certificate:fingerprint FILE
+
+ARGUMENTS
+  FILE  file path to certificate to fingerprint
+```
+
+_See code: [src/commands/certificate/fingerprint.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/fingerprint.js)_
 
 ## `aio certificate:generate`
 
