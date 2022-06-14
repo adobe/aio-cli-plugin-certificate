@@ -16,7 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.ADOBE_BOT_GITHUB_TOKEN }}
           ref: ${{ github.event.inputs.branch }}
       - uses: actions/setup-node@v1
         with:
