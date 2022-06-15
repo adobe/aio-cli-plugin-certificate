@@ -55,6 +55,20 @@ ARGUMENTS
 
 _See code: [src/commands/certificate/fingerprint.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.4.0/src/commands/certificate/fingerprint.js)_
 
+## `aio certificate:fingerprint FILE`
+
+Compute the fingerprint of a public key certificate for use with Adobe I/O
+
+```
+USAGE
+  $ aio certificate:fingerprint FILE
+
+ARGUMENTS
+  FILE  file path to certificate to fingerprint
+```
+
+_See code: [src/commands/certificate/fingerprint.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/fingerprint.js)_
+
 ## `aio certificate:generate`
 
 Generate a new private/public key pair
