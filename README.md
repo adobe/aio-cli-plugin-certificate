@@ -37,6 +37,9 @@ Generate or verify a certificate for use with Adobe I/O
 ```
 USAGE
   $ aio certificate
+
+DESCRIPTION
+  Generate or verify a certificate for use with Adobe I/O
 ```
 
 _See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.4.0/src/commands/certificate/index.js)_
@@ -69,35 +72,48 @@ ARGUMENTS
 
 _See code: [src/commands/certificate/fingerprint.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/fingerprint.js)_
 
+## `aio certificate:fingerprint FILE`
+
+Compute the fingerprint of a public key certificate for use with Adobe I/O
+
+```
+USAGE
+  $ aio certificate:fingerprint [FILE]
+
+ARGUMENTS
+  FILE  file path to certificate to fingerprint
+
+DESCRIPTION
+  Compute the fingerprint of a public key certificate for use with Adobe I/O
+```
+
+_See code: [src/commands/certificate/fingerprint.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/0.3.1/src/commands/certificate/fingerprint.js)_
+
 ## `aio certificate:generate`
 
 Generate a new private/public key pair
 
 ```
 USAGE
-  $ aio certificate:generate
+  $ aio certificate:generate [--keyout <value>] [--out <value>] [-n <value>] [-c <value>] [-s <value>] [-l <value>] [-o
+    <value>] [-u <value>] [--days <value>]
 
-OPTIONS
-  -c, --country=country            Country Name
-  -l, --locality=locality          Locality, or city name
-
-  -n, --name=name                  [default: selfsign.localhost] Common Name: typically a host domain name, like
-                                   www.mysite.com
-
-  -o, --organization=organization  Organization name
-
-  -s, --state=state                State or Province
-
-  -u, --unit=unit                  Organizational unit or department
-
-  --days=days                      [default: 365] Number of days the certificate should be valid for. (Max 365)
-
-  --keyout=keyout                  [default: private.key] file to send the key to
-
-  --out=out                        [default: certificate_pub.crt] output file
+FLAGS
+  -c, --country=<value>       Country Name
+  -l, --locality=<value>      Locality, or city name
+  -n, --name=<value>          [default: selfsign.localhost] Common Name: typically a host domain name, like
+                              www.mysite.com
+  -o, --organization=<value>  Organization name
+  -s, --state=<value>         State or Province
+  -u, --unit=<value>          Organizational unit or department
+  --days=<value>              [default: 365] Number of days the certificate should be valid for. (Max 365)
+  --keyout=<value>            [default: private.key] file to send the key to
+  --out=<value>               [default: certificate_pub.crt] output file
 
 DESCRIPTION
-  Generate a self-signed certificate to enable https:// on localhost or signing jwt payloads for interacting with Adobe 
+  Generate a new private/public key pair
+
+  Generate a self-signed certificate to enable https:// on localhost or signing jwt payloads for interacting with Adobe
   services.
 ```
 
@@ -109,15 +125,17 @@ Verify a certificate for use with Adobe I/O
 
 ```
 USAGE
-  $ aio certificate:verify FILE
+  $ aio certificate:verify [FILE] [--days <value>]
 
 ARGUMENTS
   FILE  file path to certificate to verify
 
-OPTIONS
-  --days=days  +- is certificate valid in --days
+FLAGS
+  --days=<value>  +- is certificate valid in --days
 
 DESCRIPTION
+  Verify a certificate for use with Adobe I/O
+
   Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
 

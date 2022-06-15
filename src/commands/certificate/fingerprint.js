@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { Command } = require('@oclif/command')
+const { Command } = require('@oclif/core')
 const fs = require('fs-extra')
 const debug = require('debug')('aio-cli-plugin-certificate:fingerprint')
 
@@ -18,7 +18,7 @@ const cert = require('../../certificate')
 
 class FingerprintCommand extends Command {
   async run () {
-    const { args } = this.parse(FingerprintCommand)
+    const { args } = await this.parse(FingerprintCommand)
 
     if (!fs.existsSync(args.file)) {
       this.error('input file does not exist: ' + args.file)

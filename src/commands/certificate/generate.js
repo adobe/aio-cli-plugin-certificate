@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { Command, flags } = require('@oclif/command')
+const { Command, Flags } = require('@oclif/core')
 const fs = require('fs-extra')
 const debug = require('debug')('aio-cli-plugin-certificate:generate')
 
@@ -18,7 +18,7 @@ const cert = require('../../certificate')
 
 class GenerateCommand extends Command {
   async run () {
-    const { flags } = this.parse(GenerateCommand)
+    const { flags } = await this.parse(GenerateCommand)
     if (fs.existsSync(flags.keyout)) {
       this.error('--keyout file exists: ' + flags.keyout)
     }
@@ -40,40 +40,40 @@ Generate a self-signed certificate to enable https:// on localhost or signing jw
 `
 
 GenerateCommand.flags = {
-  keyout: flags.string({
+  keyout: Flags.string({
     description: 'file to send the key to',
     default: 'private.key'
   }),
-  out: flags.string({
+  out: Flags.string({
     description: 'output file',
     default: 'certificate_pub.crt'
   }),
-  name: flags.string({
+  name: Flags.string({
     char: 'n',
     description: 'Common Name: typically a host domain name, like www.mysite.com',
     default: 'selfsign.localhost'
   }),
-  country: flags.string({
+  country: Flags.string({
     char: 'c',
     description: 'Country Name'
   }),
-  state: flags.string({
+  state: Flags.string({
     char: 's',
     description: 'State or Province'
   }),
-  locality: flags.string({
+  locality: Flags.string({
     char: 'l',
     description: 'Locality, or city name'
   }),
-  organization: flags.string({
+  organization: Flags.string({
     char: 'o',
     description: 'Organization name'
   }),
-  unit: flags.string({
+  unit: Flags.string({
     char: 'u',
     description: 'Organizational unit or department'
   }),
-  days: flags.integer({
+  days: Flags.integer({
     description: 'Number of days the certificate should be valid for. (Max 365)',
     default: 365
   })
