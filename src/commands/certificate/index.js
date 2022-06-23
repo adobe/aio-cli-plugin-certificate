@@ -15,10 +15,10 @@ const { Command, Help } = require('@oclif/core')
 class AIOCommand extends Command {
   async run () {
     const help = new Help(this.config)
-    return await help.showHelp(['certificate:generate', '--help'])
+    return await help.showHelp(['certificate', '--help'])
   }
 }
 
-AIOCommand.description = 'Generate or verify a certificate for use with Adobe I/O'
+AIOCommand.description = 'Generate, fingerprint, or verify a certificate for use with Adobe I/O'
 
 module.exports = AIOCommand
