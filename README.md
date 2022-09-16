@@ -26,9 +26,9 @@ $ aio certificate --help
 # Commands
 <!-- commands -->
 * [`aio certificate`](#aio-certificate)
-* [`aio certificate:fingerprint FILE`](#aio-certificatefingerprint-file)
-* [`aio certificate:generate`](#aio-certificategenerate)
-* [`aio certificate:verify FILE`](#aio-certificateverify-file)
+* [`aio certificate fingerprint FILE`](#aio-certificate-fingerprint-file)
+* [`aio certificate generate`](#aio-certificate-generate)
+* [`aio certificate verify FILE`](#aio-certificate-verify-file)
 
 ## `aio certificate`
 
@@ -44,13 +44,13 @@ DESCRIPTION
 
 _See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/1.0.0/src/commands/certificate/index.js)_
 
-## `aio certificate:fingerprint FILE`
+## `aio certificate fingerprint FILE`
 
 Compute the fingerprint of a public key certificate for use with Adobe I/O
 
 ```
 USAGE
-  $ aio certificate:fingerprint [FILE]
+  $ aio certificate fingerprint [FILE]
 
 ARGUMENTS
   FILE  file path to certificate to fingerprint
@@ -59,15 +59,13 @@ DESCRIPTION
   Compute the fingerprint of a public key certificate for use with Adobe I/O
 ```
 
-_See code: [src/commands/certificate/fingerprint.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/1.0.0/src/commands/certificate/fingerprint.js)_
-
-## `aio certificate:generate`
+## `aio certificate generate`
 
 Generate a new private/public key pair
 
 ```
 USAGE
-  $ aio certificate:generate [--keyout <value>] [--out <value>] [-n <value>] [-c <value>] [-s <value>] [-l <value>] [-o
+  $ aio certificate generate [--keyout <value>] [--out <value>] [-n <value>] [-c <value>] [-s <value>] [-l <value>] [-o
     <value>] [-u <value>] [--days <value>]
 
 FLAGS
@@ -89,15 +87,13 @@ DESCRIPTION
   services.
 ```
 
-_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/1.0.0/src/commands/certificate/generate.js)_
-
-## `aio certificate:verify FILE`
+## `aio certificate verify FILE`
 
 Verify a certificate for use with Adobe I/O
 
 ```
 USAGE
-  $ aio certificate:verify [FILE] [--days <value>]
+  $ aio certificate verify [FILE] [--days <value>]
 
 ARGUMENTS
   FILE  file path to certificate to verify
@@ -110,8 +106,6 @@ DESCRIPTION
 
   Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
-
-_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/1.0.0/src/commands/certificate/verify.js)_
 <!-- commandsstop -->
 
 ## Contributing
