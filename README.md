@@ -42,7 +42,7 @@ DESCRIPTION
   Generate, fingerprint, or verify a certificate for use with Adobe I/O
 ```
 
-_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/1.0.0/src/commands/certificate/index.js)_
+_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/1.0.1/src/commands/certificate/index.js)_
 
 ## `aio certificate fingerprint FILE`
 
