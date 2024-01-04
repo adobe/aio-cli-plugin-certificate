@@ -41,20 +41,20 @@ function fingerprint (pemCert) {
   -newkey rsa:bits generate a new RSA key of 'bits' in size
   -keyout arg    file to send the key to
   -out arg       output file
-*/
+ */
 
 /**
  * Generates a certificate and a private key pair
  * Similar to openssl req -x509 -sha256 -nodes -days 365 -subj "/C=US/" -newkey rsa:2048
  *
- * @param {string} commonName
+ * @param {string} commonName the common name of the cert
  * @param {number} days (integer)
  * @param {object} [attributes={}] optional certificate attributes
- * @param {string} [attributes.country]
- * @param {string} [attributes.state]
- * @param {string} [attributes.locality]
- * @param {string} [attributes.organization]
- * @param {string} [attributes.unit]
+ * @param {string} [attributes.country] the cert country
+ * @param {string} [attributes.state] the cert state
+ * @param {string} [attributes.locality] the cert locality
+ * @param {string} [attributes.organization] the cert organization
+ * @param {string} [attributes.unit] the cert unit (in the org)
  * @returns {{privateKey: string, cert: string}} key pair
  */
 function generate (commonName, days, /* istanbul ignore next */ attributes = {}) {
@@ -146,7 +146,7 @@ function generate (commonName, days, /* istanbul ignore next */ attributes = {})
  * Verifies a valid pem certificate and returns information about its validity
  * Throws if the input is not a valid pem certificate.
  *
- * @param {string|Buffer} pemCert
+ * @param {string|Buffer} pemCert the contents of the cert
  * @returns {{verified: boolean, validUntil: Date, validSince: Date}} key pair
  */
 function verify (pemCert) {
