@@ -10,10 +10,6 @@ on:
         description: 'The dist-tag use'
         required: false
         default: 'next'
-      dependencies-to-update:
-        description: 'csv of dependencies to update with the dist-tag'
-        required: false
-        default: ''
 
 jobs:
   checkout:
