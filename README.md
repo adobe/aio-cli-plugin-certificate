@@ -42,7 +42,7 @@ DESCRIPTION
   Generate, fingerprint, or verify a certificate for use with Adobe I/O
 ```
 
-_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/1.0.1/src/commands/certificate/index.js)_
+_See code: [src/commands/certificate/index.ts](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.0.0/src/commands/certificate/index.ts)_
 
 ## `aio certificate fingerprint FILE`
 
@@ -50,7 +50,7 @@ Compute the fingerprint of a public key certificate for use with Adobe I/O
 
 ```
 USAGE
-  $ aio certificate fingerprint [FILE]
+  $ aio certificate fingerprint FILE
 
 ARGUMENTS
   FILE  file path to certificate to fingerprint
@@ -58,6 +58,8 @@ ARGUMENTS
 DESCRIPTION
   Compute the fingerprint of a public key certificate for use with Adobe I/O
 ```
+
+_See code: [src/commands/certificate/fingerprint.ts](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.0.0/src/commands/certificate/fingerprint.ts)_
 
 ## `aio certificate generate`
 
@@ -82,10 +84,11 @@ FLAGS
 
 DESCRIPTION
   Generate a new private/public key pair
-
   Generate a self-signed certificate to enable https:// on localhost or signing jwt payloads for interacting with Adobe
   services.
 ```
+
+_See code: [src/commands/certificate/generate.ts](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.0.0/src/commands/certificate/generate.ts)_
 
 ## `aio certificate verify FILE`
 
@@ -93,7 +96,7 @@ Verify a certificate for use with Adobe I/O
 
 ```
 USAGE
-  $ aio certificate verify [FILE] [--days <value>]
+  $ aio certificate verify FILE [--days <value>]
 
 ARGUMENTS
   FILE  file path to certificate to verify
@@ -103,9 +106,10 @@ FLAGS
 
 DESCRIPTION
   Verify a certificate for use with Adobe I/O
-
   Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
+
+_See code: [src/commands/certificate/verify.ts](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.0.0/src/commands/certificate/verify.ts)_
 <!-- commandsstop -->
 
 ## Contributing
