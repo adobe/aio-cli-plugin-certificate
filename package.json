@@ -1,6 +1,6 @@
 {
   "name": "@adobe/aio-cli-plugin-certificate",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Generate and validate private certificates, and public key pairs for use with Adobe IO Console",
   "repository": "adobe/aio-cli-plugin-certificate",
   "homepage": "https://github.com/adobe/aio-cli-plugin-certificate",
