@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { Command } = require('@oclif/core')
+const { Command, Args } = require('@oclif/core')
 const fs = require('fs-extra')
 const debug = require('debug')('aio-cli-plugin-certificate:fingerprint')
 
@@ -41,12 +41,11 @@ class FingerprintCommand extends Command {
 
 FingerprintCommand.description = 'Compute the fingerprint of a public key certificate for use with Adobe I/O'
 
-FingerprintCommand.args = [
-  {
-    name: 'file',
+FingerprintCommand.args = {
+  file: Args.string({
     required: true,
     description: 'file path to certificate to fingerprint'
-  }
-]
+  })
+}
 
 module.exports = FingerprintCommand
