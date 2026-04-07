@@ -31,15 +31,16 @@ test('description', async () => {
 })
 
 test('args', async () => {
-  const arg = TheCommand.args[0]
-  expect(arg.name).toBeDefined()
+  expect(Object.keys(TheCommand.args)[0]).toBeDefined()
 })
+
+const mockConfig = { runHook: jest.fn().mockResolvedValue({ successes: [], failures: [] }) }
 
 describe('instance methods', () => {
   let command, handleError
 
   beforeEach(() => {
-    command = new TheCommand([])
+    command = new TheCommand([], mockConfig)
     handleError = jest.spyOn(command, 'error')
   })
 

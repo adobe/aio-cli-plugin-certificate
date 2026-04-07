@@ -49,9 +49,10 @@ test('description', async () => {
 })
 
 test('args', async () => {
-  const arg = TheCommand.args[0]
-  expect(arg.name).toBeDefined()
+  expect(Object.keys(TheCommand.args)[0]).toBeDefined()
 })
+
+const mockConfig = { runHook: jest.fn().mockResolvedValue({ successes: [], failures: [] }) }
 
 describe('instance methods - mock forge', () => {
   let CommandUnderTest, command, handleError, mockFS, mockForge
@@ -63,7 +64,7 @@ describe('instance methods - mock forge', () => {
   })
 
   beforeEach(() => {
-    command = new CommandUnderTest([])
+    command = new CommandUnderTest([], mockConfig)
     handleError = jest.spyOn(command, 'error')
   })
 
@@ -103,7 +104,7 @@ describe('instance methods - real forge', () => {
   })
 
   beforeEach(() => {
-    command = new CommandUnderTest([])
+    command = new CommandUnderTest([], mockConfig)
     handleError = jest.spyOn(command, 'error')
   })
 

@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { Command, Flags } = require('@oclif/core')
+const { Command, Flags, Args } = require('@oclif/core')
 const fs = require('fs-extra')
 const debug = require('debug')('aio-cli-plugin-certificate:verify')
 
@@ -70,12 +70,11 @@ VerifyCommand.flags = {
   })
 }
 
-VerifyCommand.args = [
-  {
-    name: 'file',
+VerifyCommand.args = {
+  file: Args.string({
     required: true,
     description: 'file path to certificate to verify'
-  }
-]
+  })
+}
 
 module.exports = VerifyCommand

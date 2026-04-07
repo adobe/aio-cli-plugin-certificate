@@ -23,11 +23,13 @@ test('description', async () => {
   expect(TheCommand.description).toBeDefined()
 })
 
+const mockConfig = { runHook: jest.fn().mockResolvedValue({ successes: [], failures: [] }) }
+
 describe('instance methods', () => {
   let command, handleError
 
   beforeEach(() => {
-    command = new TheCommand([])
+    command = new TheCommand([], mockConfig)
     handleError = jest.spyOn(command, 'error')
   })
 
