@@ -31,7 +31,6 @@ class FingerprintCommand extends Command {
       const res = cert.fingerprint(pemCert)
 
       this.log(res.certificateFingerprint)
-      return res.certificateFingerprint
     } catch (err) {
       debug('error fingerprinting certificate: ', err)
       this.error(err.message)

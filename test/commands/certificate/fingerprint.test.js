@@ -116,7 +116,9 @@ describe('instance methods - real forge', () => {
     mockFS.existsSync.mockReturnValue(true)
     mockFS.readFileSync.mockReturnValue(Buffer.from(validCertPem))
     command.argv = ['file']
-    await expect(command.run()).resolves.toBe(validCertFingerprint)
+    const logSpy = jest.spyOn(command, 'log')
+    await expect(command.run()).resolves.toBeUndefined()
+    expect(logSpy).toHaveBeenCalledWith(validCertFingerprint)
     expect(handleError).not.toHaveBeenCalled()
   })
 })
