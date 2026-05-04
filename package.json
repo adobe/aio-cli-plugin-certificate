@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@adobe/eslint-config-aio-lib-config": "^5.0.0",
-    "eslint": "^9",
+    "eslint": "^10",
     "eslint-plugin-jest": "^29",
     "eslint-plugin-jsdoc": "^48",
     "jest": "^29",
