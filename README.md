@@ -42,7 +42,7 @@ DESCRIPTION
   Generate, fingerprint, or verify a certificate for use with Adobe I/O
 ```
 
-_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.0.1/src/commands/certificate/index.js)_
+_See code: [src/commands/certificate/index.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.1.0/src/commands/certificate/index.js)_
 
 ## `aio certificate fingerprint FILE`
 
@@ -59,7 +59,7 @@ DESCRIPTION
   Compute the fingerprint of a public key certificate for use with Adobe I/O
 ```
 
-_See code: [src/commands/certificate/fingerprint.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.0.1/src/commands/certificate/fingerprint.js)_
+_See code: [src/commands/certificate/fingerprint.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.1.0/src/commands/certificate/fingerprint.js)_
 
 ## `aio certificate generate`
 
@@ -78,9 +78,9 @@ FLAGS
   -o, --organization=<value>  Organization name
   -s, --state=<value>         State or Province
   -u, --unit=<value>          Organizational unit or department
-  --days=<value>              [default: 365] Number of days the certificate should be valid for. (Max 365)
-  --keyout=<value>            [default: private.key] file to send the key to
-  --out=<value>               [default: certificate_pub.crt] output file
+      --days=<value>          [default: 365] Number of days the certificate should be valid for. (Max 365)
+      --keyout=<value>        [default: private.key] file to send the key to
+      --out=<value>           [default: certificate_pub.crt] output file
 
 DESCRIPTION
   Generate a new private/public key pair
@@ -88,7 +88,7 @@ DESCRIPTION
   services.
 ```
 
-_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.0.1/src/commands/certificate/generate.js)_
+_See code: [src/commands/certificate/generate.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.1.0/src/commands/certificate/generate.js)_
 
 ## `aio certificate verify FILE`
 
@@ -109,7 +109,7 @@ DESCRIPTION
   Verifies that the certificate is valid, and/or will not expire in [--days] days from now.
 ```
 
-_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.0.1/src/commands/certificate/verify.js)_
+_See code: [src/commands/certificate/verify.js](https://github.com/adobe/aio-cli-plugin-certificate/blob/2.1.0/src/commands/certificate/verify.js)_
 <!-- commandsstop -->
 
 ## Contributing
