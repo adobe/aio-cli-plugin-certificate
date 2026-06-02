@@ -1,4 +1,4 @@
-const { stdout } = require('stdout-stderr')
+import stdout from 'stdout-stderr'
 
 beforeAll(() => stdout.start())
 afterAll(() => stdout.stop())

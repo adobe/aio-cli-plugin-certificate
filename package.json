@@ -4,10 +4,11 @@
   "description": "Generate and validate private certificates, and public key pairs for use with Adobe IO Console",
   "repository": "adobe/aio-cli-plugin-certificate",
   "homepage": "https://github.com/adobe/aio-cli-plugin-certificate",
+  "type": "module",
   "dependencies": {
     "@oclif/core": "^4.9.0",
     "debug": "^4.3.3",
-    "fs-extra": "^9.0.0",
+    "fs-extra": "^11.3.5",
     "node-forge": "^1.3.0"
   },
   "devDependencies": {
