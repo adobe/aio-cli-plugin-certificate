@@ -78,5 +78,4 @@ VerifyCommand.args = {
   })
 }
 
-// module.exports = VerifyCommand
 export default VerifyCommand

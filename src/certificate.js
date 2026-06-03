@@ -164,9 +164,4 @@ function verify (pemCert) {
   }
 }
 
-// module.exports = {
-//   fingerprint,
-//   generate,
-//   verify
-// }
 export { fingerprint, generate, verify }

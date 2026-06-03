@@ -7,11 +7,10 @@ export default defineConfig({
     testTimeout: 30000,
     setupFiles: ['./test/vitest.setup.js'],
     include: ['test/**/*.test.js'],
-    exclude: ['**/node_modules/**', '**/tests/fixtures/**'],
+    exclude: ['**/node_modules/**'],
     coverage: {
       enabled: true,
-      include: ['src/**'],
-      exclude: ['**/tests/fixtures/**']
+      include: ['src/**']
     }
   }
 })
