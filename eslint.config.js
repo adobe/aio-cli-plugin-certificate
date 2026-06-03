@@ -11,11 +11,19 @@ governing permissions and limitations under the License.
 */
 
 import aioLibConfig from '@adobe/eslint-config-aio-lib-config'
-import pluginJest from 'eslint-plugin-jest'
+import vitest from '@vitest/eslint-plugin'
 
 export default [
   ...aioLibConfig,
-  pluginJest.configs['flat/recommended'],
+  {
+    files: ['test/**'],
+    ...vitest.configs.recommended,
+    languageOptions: {
+      globals: {
+        ...vitest.environments.env.globals
+      }
+    }
+  },
   {
     rules: {
       'jsdoc/no-defaults': 'off'

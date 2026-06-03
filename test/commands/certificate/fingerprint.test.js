@@ -10,11 +10,11 @@ governing permissions and limitations under the License.
 */
 
 // const { stdout } = require('stdout-stderr')
-const commandPath = '../../../src/commands/certificate/fingerprint'
-let TheCommand
-jest.isolateModules(() => {
-  TheCommand = require(commandPath)
-})
+import { vi } from 'vitest'
+import TheCommand from '../../../src/commands/certificate/fingerprint.js'
+import mockFS from 'fs-extra'
+
+const commandPath = '../../../src/commands/certificate/fingerprint.js'
 
 const validCertPem = `
   -----BEGIN CERTIFICATE-----
@@ -52,24 +52,39 @@ test('args', async () => {
   expect(Object.keys(TheCommand.args)[0]).toBeDefined()
 })
 
-const mockConfig = { runHook: jest.fn().mockResolvedValue({ successes: [], failures: [] }) }
+const mockConfig = { runHook: vi.fn().mockResolvedValue({ successes: [], failures: [] }) }
 
 describe('instance methods - mock forge', () => {
-  let CommandUnderTest, command, handleError, mockFS, mockForge
-  jest.isolateModules(() => {
-    CommandUnderTest = require(commandPath)
-    mockFS = require('fs-extra')
-    mockForge = require('node-forge')
-    jest.mock('node-forge')
+  let CommandUnderTest, command, handleError, mockForge
+
+  beforeAll(async () => {
+    vi.resetModules()
+    // vitest does not support isolateModules, so we have to build our own sandbox mock here
+    vi.doMock('node-forge', async (importOriginal) => {
+      const mod = await importOriginal()
+      const forge = mod.default ?? mod
+      return {
+        ...mod,
+        default: {
+          ...forge,
+          pki: {
+            ...forge.pki,
+            certificateFromPem: vi.fn()
+          }
+        }
+      }
+    })
+    CommandUnderTest = (await import(commandPath)).default
+    mockForge = (await import('node-forge')).default
   })
 
   beforeEach(() => {
     command = new CommandUnderTest([], mockConfig)
-    handleError = jest.spyOn(command, 'error')
+    handleError = vi.spyOn(command, 'error')
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   test('run missing args', async () => {
@@ -96,27 +111,28 @@ describe('instance methods - mock forge', () => {
 })
 
 describe('instance methods - real forge', () => {
-  let CommandUnderTest, command, handleError, mockFS
-  jest.isolateModules(() => {
-    mockFS = require('fs-extra')
-    jest.unmock('node-forge')
-    CommandUnderTest = require(commandPath)
+  let CommandUnderTest, command, handleError
+
+  beforeAll(async () => {
+    vi.resetModules()
+    vi.doUnmock('node-forge')
+    CommandUnderTest = (await import(commandPath)).default
   })
 
   beforeEach(() => {
     command = new CommandUnderTest([], mockConfig)
-    handleError = jest.spyOn(command, 'error')
+    handleError = vi.spyOn(command, 'error')
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   test('run with valid cert pem', async () => {
     mockFS.existsSync.mockReturnValue(true)
     mockFS.readFileSync.mockReturnValue(Buffer.from(validCertPem))
     command.argv = ['file']
-    const logSpy = jest.spyOn(command, 'log')
+    const logSpy = vi.spyOn(command, 'log')
     await expect(command.run()).resolves.toBeUndefined()
     expect(logSpy).toHaveBeenCalledWith(validCertFingerprint)
     expect(handleError).not.toHaveBeenCalled()
