@@ -11,8 +11,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const oclif = require('@oclif/core')
+import { run, handle, flush } from '@oclif/core'
 
-oclif.run()
-  .then(require('@oclif/core/flush'))
-  .catch(require('@oclif/core/handle'))
+await run()
+  .then(flush)
+  .catch(handle)

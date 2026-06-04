@@ -10,10 +10,10 @@ governing permissions and limitations under the License.
 */
 
 // const { stdout } = require('stdout-stderr')
-const TheCommand = require('../../../src/commands/certificate/generate')
-
-const mockFS = require('fs-extra')
-const forge = require('node-forge')
+import { vi } from 'vitest'
+import TheCommand from '../../../src/commands/certificate/generate.js'
+import mockFS from 'fs-extra'
+import forge from 'node-forge'
 
 test('exports', async () => {
   expect(typeof TheCommand).toEqual('function')
@@ -23,18 +23,18 @@ test('description', async () => {
   expect(TheCommand.description).toBeDefined()
 })
 
-const mockConfig = { runHook: jest.fn().mockResolvedValue({ successes: [], failures: [] }) }
+const mockConfig = { runHook: vi.fn().mockResolvedValue({ successes: [], failures: [] }) }
 
 describe('instance methods', () => {
   let command, handleError
 
   beforeEach(() => {
     command = new TheCommand([], mockConfig)
-    handleError = jest.spyOn(command, 'error')
+    handleError = vi.spyOn(command, 'error')
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   test('run -- no flags', async () => {
