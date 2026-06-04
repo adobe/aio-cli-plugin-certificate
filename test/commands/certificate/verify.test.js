@@ -9,7 +9,6 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-// const { stdout } = require('stdout-stderr')
 import { vi } from 'vitest'
 
 vi.mock('node-forge')
