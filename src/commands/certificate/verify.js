@@ -13,9 +13,9 @@ governing permissions and limitations under the License.
 import { Command, Flags, Args } from '@oclif/core'
 import fs from 'fs-extra'
 import logDebug from 'debug'
-const debug = logDebug('aio-cli-plugin-certificate:verify')
-
 import * as cert from '../../certificate.js'
+
+const debug = logDebug('aio-cli-plugin-certificate:verify')
 
 class VerifyCommand extends Command {
   async run () {

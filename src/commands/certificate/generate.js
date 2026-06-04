@@ -14,6 +14,7 @@ import { Command, Flags } from '@oclif/core'
 import fs from 'fs-extra'
 import logDebug from 'debug'
 import * as cert from '../../certificate.js'
+
 const debug = logDebug('aio-cli-plugin-certificate:generate')
 
 class GenerateCommand extends Command {

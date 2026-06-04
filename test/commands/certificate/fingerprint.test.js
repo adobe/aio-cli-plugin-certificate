@@ -11,11 +11,11 @@ governing permissions and limitations under the License.
 
 // const { stdout } = require('stdout-stderr')
 import { vi } from 'vitest'
-import TheCommand from '../../../src/commands/certificate/fingerprint.js'
 import mockFS from 'fs-extra'
 
+// we don't import the command up here to allow for some tests to run with isolated mocks
+// since vitest doesn't support isolateModules
 const commandPath = '../../../src/commands/certificate/fingerprint.js'
-
 const validCertPem = `
   -----BEGIN CERTIFICATE-----
 MIIDMTCCAhmgAwIBAgIHAWVCcDJVYDANBgkqhkiG9w0BAQsFADAdMRswGQYDVQQD
@@ -40,16 +40,25 @@ B9+DCYg=
 `
 const validCertFingerprint = '38f65e26bd3869ec3ca029cc0b3df98de29172b9'
 
-test('exports', async () => {
-  expect(typeof TheCommand).toEqual('function')
-})
+describe('basic functionality', () => {
+  let TheCommand
 
-test('description', async () => {
-  expect(TheCommand.description).toBeDefined()
-})
+  beforeAll(async () => {
+    vi.resetModules()
+    TheCommand = (await import(commandPath)).default
+  })
 
-test('args', async () => {
-  expect(Object.keys(TheCommand.args)[0]).toBeDefined()
+  test('exports', async () => {
+    expect(typeof TheCommand).toEqual('function')
+  })
+
+  test('description', async () => {
+    expect(TheCommand.description).toBeDefined()
+  })
+
+  test('args', async () => {
+    expect(Object.keys(TheCommand.args)[0]).toBeDefined()
+  })
 })
 
 const mockConfig = { runHook: vi.fn().mockResolvedValue({ successes: [], failures: [] }) }
