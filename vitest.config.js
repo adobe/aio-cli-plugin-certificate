@@ -10,23 +10,19 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import aioLibConfig from '@adobe/eslint-config-aio-lib-config'
-import vitest from '@vitest/eslint-plugin'
+import { defineConfig } from 'vitest/config'
 
-export default [
-  ...aioLibConfig,
-  {
-    files: ['test/**'],
-    ...vitest.configs.recommended,
-    languageOptions: {
-      globals: {
-        ...vitest.environments.env.globals
-      }
-    }
-  },
-  {
-    rules: {
-      'jsdoc/no-defaults': 'off'
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'node',
+    testTimeout: 30000,
+    setupFiles: ['./test/vitest.setup.js'],
+    include: ['test/**/*.test.js'],
+    exclude: ['**/node_modules/**'],
+    coverage: {
+      enabled: true,
+      include: ['src/**']
     }
   }
-]
+})

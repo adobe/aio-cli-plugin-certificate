@@ -10,23 +10,11 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import aioLibConfig from '@adobe/eslint-config-aio-lib-config'
-import vitest from '@vitest/eslint-plugin'
+import { stdout } from 'stdout-stderr'
+import { beforeAll, afterAll, vi } from 'vitest'
 
-export default [
-  ...aioLibConfig,
-  {
-    files: ['test/**'],
-    ...vitest.configs.recommended,
-    languageOptions: {
-      globals: {
-        ...vitest.environments.env.globals
-      }
-    }
-  },
-  {
-    rules: {
-      'jsdoc/no-defaults': 'off'
-    }
-  }
-]
+beforeAll(() => stdout.start())
+afterAll(() => stdout.stop())
+
+// don't touch the real fs
+vi.mock('fs-extra')
