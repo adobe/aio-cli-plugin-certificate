@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@adobe/eslint-config-aio-lib-config": "^5.0.0",
-    "eslint": "^9",
+    "eslint": "^10",
     "@vitest/coverage-v8": "^4.1.8",
     "@vitest/eslint-plugin": "^1",
     "eslint-plugin-jsdoc": "^48",
