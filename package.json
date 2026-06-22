@@ -16,7 +16,7 @@
     "eslint": "^9",
     "@vitest/coverage-v8": "^4.1.8",
     "@vitest/eslint-plugin": "^1",
-    "eslint-plugin-jsdoc": "^48",
+    "eslint-plugin-jsdoc": "^63",
     "neostandard": "^0",
     "oclif": "^4.0.0",
     "stdout-stderr": "^0.1.9",
