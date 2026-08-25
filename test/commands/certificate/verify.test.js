@@ -9,13 +9,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { vi } from 'vitest'
+// const { stdout } = require('stdout-stderr')
+const TheCommand = require('../../../src/commands/certificate/verify')
 
-vi.mock('node-forge')
-
-import TheCommand from '../../../src/commands/certificate/verify.js'
-import mockFS from 'fs-extra'
-import mockForge from 'node-forge'
+const mockFS = require('fs-extra')
+const mockForge = require('node-forge')
+jest.mock('node-forge')
 
 const distantFuture = new Date()
 distantFuture.setFullYear(distantFuture.getFullYear() + 1)
@@ -35,18 +34,18 @@ test('args', async () => {
   expect(Object.keys(TheCommand.args)[0]).toBeDefined()
 })
 
-const mockConfig = { runHook: vi.fn().mockResolvedValue({ successes: [], failures: [] }) }
+const mockConfig = { runHook: jest.fn().mockResolvedValue({ successes: [], failures: [] }) }
 
 describe('instance methods', () => {
   let command, handleError
 
   beforeEach(() => {
     command = new TheCommand([], mockConfig)
-    handleError = vi.spyOn(command, 'error')
+    handleError = jest.spyOn(command, 'error')
   })
 
   afterEach(() => {
-    vi.clearAllMocks()
+    jest.clearAllMocks()
   })
 
   test('run missing args', async () => {
@@ -76,7 +75,7 @@ describe('instance methods', () => {
 
   test('run with invalid file ( false & true )', async () => {
     mockFS.existsSync.mockReturnValue(true)
-    mockForge.pki.certificateFromPem.mockReturnValue({ verify: vi.fn(() => true), validity: {} })
+    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true), validity: {} })
     mockForge.pki.verifyCertificateChain.mockReturnValue(true)
     command.argv = ['file']
     await expect(command.run()).resolves.toBe(true)
@@ -85,7 +84,7 @@ describe('instance methods', () => {
 
   test('run with invalid file ( true & false )', async () => {
     mockFS.existsSync.mockReturnValue(true)
-    mockForge.pki.certificateFromPem.mockReturnValue({ verify: vi.fn(() => true), validity: {} })
+    mockForge.pki.certificateFromPem.mockReturnValue({ verify: jest.fn(() => true), validity: {} })
     mockForge.pki.verifyCertificateChain.mockReturnValue(false)
     command.argv = ['file']
     await expect(command.run()).resolves.toBe(false)
@@ -96,7 +95,7 @@ describe('instance methods', () => {
     mockFS.existsSync.mockReturnValue(true)
 
     mockForge.pki.certificateFromPem.mockReturnValue({
-      verify: vi.fn(() => true),
+      verify: jest.fn(() => true),
       validity: {
         notAfter: now,
         notBefore: distantPast
@@ -111,7 +110,7 @@ describe('instance methods', () => {
     mockFS.existsSync.mockReturnValue(true)
 
     mockForge.pki.certificateFromPem.mockReturnValue({
-      verify: vi.fn(() => true),
+      verify: jest.fn(() => true),
       validity: {
         notAfter: distantFuture,
         notBefore: now
@@ -126,7 +125,7 @@ describe('instance methods', () => {
     mockFS.existsSync.mockReturnValue(true)
 
     mockForge.pki.certificateFromPem.mockReturnValue({
-      verify: vi.fn(() => true),
+      verify: jest.fn(() => true),
       validity: {
         notAfter: distantFuture,
         notBefore: now
@@ -141,7 +140,7 @@ describe('instance methods', () => {
     mockFS.existsSync.mockReturnValue(true)
 
     mockForge.pki.certificateFromPem.mockReturnValue({
-      verify: vi.fn(() => true),
+      verify: jest.fn(() => true),
       validity: {
         notAfter: now,
         notBefore: distantPast

@@ -9,10 +9,10 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import logDebug from 'debug'
-import forge from 'node-forge'
-const { pki, asn1 } = forge
-const debug = logDebug('aio-cli-plugin-certificate:helpers')
+const debug = require('debug')('aio-cli-plugin-certificate:helpers')
+const forge = require('node-forge')
+const pki = forge.pki
+const asn1 = forge.asn1
 
 /**
  * Computes the SHA-1 digest of the entire DER-encoded x.509 certificate
@@ -164,4 +164,8 @@ function verify (pemCert) {
   }
 }
 
-export { fingerprint, generate, verify }
+module.exports = {
+  fingerprint,
+  generate,
+  verify
+}

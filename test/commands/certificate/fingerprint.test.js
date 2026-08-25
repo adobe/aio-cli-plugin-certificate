@@ -10,12 +10,12 @@ governing permissions and limitations under the License.
 */
 
 // const { stdout } = require('stdout-stderr')
-import { vi } from 'vitest'
-import mockFS from 'fs-extra'
+const commandPath = '../../../src/commands/certificate/fingerprint'
+let TheCommand
+jest.isolateModules(() => {
+  TheCommand = require(commandPath)
+})
 
-// we don't import the command up here to allow for some tests to run with isolated mocks
-// since vitest doesn't support isolateModules
-const commandPath = '../../../src/commands/certificate/fingerprint.js'
 const validCertPem = `
   -----BEGIN CERTIFICATE-----
 MIIDMTCCAhmgAwIBAgIHAWVCcDJVYDANBgkqhkiG9w0BAQsFADAdMRswGQYDVQQD
@@ -40,60 +40,36 @@ B9+DCYg=
 `
 const validCertFingerprint = '38f65e26bd3869ec3ca029cc0b3df98de29172b9'
 
-describe('basic functionality', () => {
-  let TheCommand
-
-  beforeAll(async () => {
-    vi.resetModules()
-    TheCommand = (await import(commandPath)).default
-  })
-
-  test('exports', async () => {
-    expect(typeof TheCommand).toEqual('function')
-  })
-
-  test('description', async () => {
-    expect(TheCommand.description).toBeDefined()
-  })
-
-  test('args', async () => {
-    expect(Object.keys(TheCommand.args)[0]).toBeDefined()
-  })
+test('exports', async () => {
+  expect(typeof TheCommand).toEqual('function')
 })
 
-const mockConfig = { runHook: vi.fn().mockResolvedValue({ successes: [], failures: [] }) }
+test('description', async () => {
+  expect(TheCommand.description).toBeDefined()
+})
+
+test('args', async () => {
+  expect(Object.keys(TheCommand.args)[0]).toBeDefined()
+})
+
+const mockConfig = { runHook: jest.fn().mockResolvedValue({ successes: [], failures: [] }) }
 
 describe('instance methods - mock forge', () => {
-  let CommandUnderTest, command, handleError, mockForge
-
-  beforeAll(async () => {
-    vi.resetModules()
-    // vitest does not support isolateModules, so we have to build our own sandbox mock here
-    vi.doMock('node-forge', async (importOriginal) => {
-      const mod = await importOriginal()
-      const forge = mod.default ?? mod
-      return {
-        ...mod,
-        default: {
-          ...forge,
-          pki: {
-            ...forge.pki,
-            certificateFromPem: vi.fn()
-          }
-        }
-      }
-    })
-    CommandUnderTest = (await import(commandPath)).default
-    mockForge = (await import('node-forge')).default
+  let CommandUnderTest, command, handleError, mockFS, mockForge
+  jest.isolateModules(() => {
+    CommandUnderTest = require(commandPath)
+    mockFS = require('fs-extra')
+    mockForge = require('node-forge')
+    jest.mock('node-forge')
   })
 
   beforeEach(() => {
     command = new CommandUnderTest([], mockConfig)
-    handleError = vi.spyOn(command, 'error')
+    handleError = jest.spyOn(command, 'error')
   })
 
   afterEach(() => {
-    vi.clearAllMocks()
+    jest.clearAllMocks()
   })
 
   test('run missing args', async () => {
@@ -120,28 +96,27 @@ describe('instance methods - mock forge', () => {
 })
 
 describe('instance methods - real forge', () => {
-  let CommandUnderTest, command, handleError
-
-  beforeAll(async () => {
-    vi.resetModules()
-    vi.doUnmock('node-forge')
-    CommandUnderTest = (await import(commandPath)).default
+  let CommandUnderTest, command, handleError, mockFS
+  jest.isolateModules(() => {
+    mockFS = require('fs-extra')
+    jest.unmock('node-forge')
+    CommandUnderTest = require(commandPath)
   })
 
   beforeEach(() => {
     command = new CommandUnderTest([], mockConfig)
-    handleError = vi.spyOn(command, 'error')
+    handleError = jest.spyOn(command, 'error')
   })
 
   afterEach(() => {
-    vi.clearAllMocks()
+    jest.clearAllMocks()
   })
 
   test('run with valid cert pem', async () => {
     mockFS.existsSync.mockReturnValue(true)
     mockFS.readFileSync.mockReturnValue(Buffer.from(validCertPem))
     command.argv = ['file']
-    const logSpy = vi.spyOn(command, 'log')
+    const logSpy = jest.spyOn(command, 'log')
     await expect(command.run()).resolves.toBeUndefined()
     expect(logSpy).toHaveBeenCalledWith(validCertFingerprint)
     expect(handleError).not.toHaveBeenCalled()
