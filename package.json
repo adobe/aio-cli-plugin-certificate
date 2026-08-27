@@ -4,21 +4,23 @@
   "description": "Generate and validate private certificates, and public key pairs for use with Adobe IO Console",
   "repository": "adobe/aio-cli-plugin-certificate",
   "homepage": "https://github.com/adobe/aio-cli-plugin-certificate",
+  "type": "module",
   "dependencies": {
     "@oclif/core": "^4.9.0",
     "debug": "^4.3.3",
-    "fs-extra": "^9.0.0",
+    "fs-extra": "^11.3.5",
     "node-forge": "^1.3.0"
   },
   "devDependencies": {
     "@adobe/eslint-config-aio-lib-config": "^5.0.0",
     "eslint": "^9",
-    "eslint-plugin-jest": "^29",
+    "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/eslint-plugin": "^1",
     "eslint-plugin-jsdoc": "^48",
-    "jest": "^29",
     "neostandard": "^0",
     "oclif": "^4.0.0",
-    "stdout-stderr": "^0.1.9"
+    "stdout-stderr": "^0.1.9",
+    "vitest": "^4.1.8"
   },
   "engines": {
     "node": ">=20"
@@ -43,22 +45,9 @@
   "scripts": {
     "posttest": "eslint src test",
     "test": "npm run unit-tests",
-    "unit-tests": "jest --ci",
+    "unit-tests": "vitest run",
     "prepack": "oclif manifest && oclif readme --no-aliases",
     "postpack": "rm -f oclif.manifest.json",
     "version": "oclif readme && git add README.md"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "testPathIgnorePatterns": [
-      "<rootDir>/tests/fixtures/"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/tests/fixtures/"
-    ],
-    "testEnvironment": "node",
-    "setupFilesAfterEnv": [
-      "./test/jest.setup.js"
-    ]
   }
 }
