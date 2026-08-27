@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { Command, Help } from '@oclif/core'
+const { Command, Help } = require('@oclif/core')
 
 class AIOCommand extends Command {
   async run () {
@@ -21,4 +21,4 @@ class AIOCommand extends Command {
 
 AIOCommand.description = 'Generate, fingerprint, or verify a certificate for use with Adobe I/O'
 
-export default AIOCommand
+module.exports = AIOCommand

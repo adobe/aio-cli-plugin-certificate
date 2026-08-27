@@ -10,12 +10,11 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { Command, Flags, Args } from '@oclif/core'
-import fs from 'fs-extra'
-import logDebug from 'debug'
-import * as cert from '../../certificate.js'
+const { Command, Flags, Args } = require('@oclif/core')
+const fs = require('fs-extra')
+const debug = require('debug')('aio-cli-plugin-certificate:verify')
 
-const debug = logDebug('aio-cli-plugin-certificate:verify')
+const cert = require('../../certificate')
 
 class VerifyCommand extends Command {
   async run () {
@@ -78,4 +77,4 @@ VerifyCommand.args = {
   })
 }
 
-export default VerifyCommand
+module.exports = VerifyCommand

@@ -10,12 +10,11 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { Command, Args } from '@oclif/core'
-import fs from 'fs-extra'
-import logDebug from 'debug'
-import * as cert from '../../certificate.js'
+const { Command, Args } = require('@oclif/core')
+const fs = require('fs-extra')
+const debug = require('debug')('aio-cli-plugin-certificate:fingerprint')
 
-const debug = logDebug('aio-cli-plugin-certificate:fingerprint')
+const cert = require('../../certificate')
 
 class FingerprintCommand extends Command {
   async run () {
@@ -48,4 +47,4 @@ FingerprintCommand.args = {
   })
 }
 
-export default FingerprintCommand
+module.exports = FingerprintCommand

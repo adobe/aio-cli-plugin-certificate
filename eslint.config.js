@@ -10,20 +10,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import aioLibConfig from '@adobe/eslint-config-aio-lib-config'
-import vitest from '@vitest/eslint-plugin'
+const aioLibConfig = require('@adobe/eslint-config-aio-lib-config')
+const pluginJest = require('eslint-plugin-jest')
 
-export default [
+module.exports = [
   ...aioLibConfig,
-  {
-    files: ['test/**'],
-    ...vitest.configs.recommended,
-    languageOptions: {
-      globals: {
-        ...vitest.environments.env.globals
-      }
-    }
-  },
+  pluginJest.configs['flat/recommended'],
   {
     rules: {
       'jsdoc/no-defaults': 'off'
